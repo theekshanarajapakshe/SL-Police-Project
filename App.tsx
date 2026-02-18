@@ -3,7 +3,6 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { OfficerDashboard } from './pages/officer/OfficerDashboard';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
-import { VehicleManagement } from './pages/admin/VehicleManagement';
 import { Layout } from './components/Layout';
 import { User, UserRole } from './types';
 
@@ -49,7 +48,7 @@ function App() {
           
           <Route path="/admin/vehicles" element={
             <ProtectedRoute allowedRoles={[UserRole.ADMIN, UserRole.SUPER_ADMIN]}>
-              <VehicleManagement />
+              <div className="text-center p-10 text-gray-500">Vehicle Management Module (Coming Soon)</div>
             </ProtectedRoute>
           } />
         </Routes>

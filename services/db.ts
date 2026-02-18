@@ -36,7 +36,7 @@ const MOCK_DRIVERS: Driver[] = [
   }
 ];
 
-let MOCK_VEHICLES: Vehicle[] = [
+const MOCK_VEHICLES: Vehicle[] = [
   {
     id: 1,
     number_plate: 'WP-CAB-1234',
@@ -138,29 +138,6 @@ export const db = {
     // Join driver data
     const driver = MOCK_DRIVERS.find(d => d.nic === vehicle.owner_nic);
     return { ...vehicle, driver };
-  },
-
-  getAllVehicles: async (): Promise<Vehicle[]> => {
-    await new Promise(r => setTimeout(r, 600));
-    return MOCK_VEHICLES.map(v => ({
-      ...v,
-      driver: MOCK_DRIVERS.find(d => d.nic === v.owner_nic)
-    }));
-  },
-
-  upsertVehicle: async (vehicle: Vehicle): Promise<void> => {
-    await new Promise(r => setTimeout(r, 800));
-    if (vehicle.id && vehicle.id > 0) {
-      const index = MOCK_VEHICLES.findIndex(v => v.id === vehicle.id);
-      if (index !== -1) {
-        MOCK_VEHICLES[index] = { ...MOCK_VEHICLES[index], ...vehicle };
-        return;
-      }
-    }
-    
-    // Create new
-    const newId = MOCK_VEHICLES.length > 0 ? Math.max(...MOCK_VEHICLES.map(v => v.id)) + 1 : 1;
-    MOCK_VEHICLES.push({ ...vehicle, id: newId });
   },
 
   getOffenses: async (): Promise<Offense[]> => {
